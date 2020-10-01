@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class Stat
@@ -8,7 +9,7 @@ public class Stat
 
     private List<StatBonus> StatBonuses = new List<StatBonus>();
     private List<StatMultiplier> StatMultipliers = new List<StatMultiplier>();
-    private int baseValue;
+    [SerializeField]private int baseValue;
 
     public Stat(StatName name, int _baseValue)
     {
@@ -31,10 +32,13 @@ public class Stat
         StatBonuses.Remove(StatBonuses.Find(x => x.BonusValue == statBonus.BonusValue));
     }
 
-    public int GetFinalValue()
+    public int FinalValue
     {
-        int finalValue = baseValue;
-        StatBonuses.ForEach(x => finalValue += x.BonusValue);
-        return finalValue;
+        get
+        {
+            int finalValue = baseValue;
+            StatBonuses.ForEach(x => finalValue += x.BonusValue);
+            return finalValue;
+        }
     }
 }

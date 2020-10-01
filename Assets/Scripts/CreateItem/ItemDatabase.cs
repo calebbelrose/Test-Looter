@@ -9,7 +9,7 @@ public class ItemDatabase : MonoBehaviour {
     public TextAsset dbFile;
     public SortAndFilterManager safm;
     public ObjectPoolScript ItemEquipPool;
-    public CharacterStats characterStats;
+    public CombatController CombatController;
 
     public List<string> TypeNameList = new List<string>();
     public List<Quality> Qualities;
@@ -82,13 +82,12 @@ public class ItemDatabase : MonoBehaviour {
 
     private void SpawnLoot(Vector3 location)
     {
-        List<Stat> stats = characterStats.Stats.OrderBy(x => UnityEngine.Random.value).Take(UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(StatName)).Length)).ToList();
+        List<Stat> stats = CombatController.Stats.OrderBy(x => UnityEngine.Random.value).Take(UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(StatName)).Length)).ToList();
         List<StatBonus> statBonuses = new List<StatBonus>();
         ItemClass newItem = new ItemClass();
-        int index = 0;
 
         for (int i = 0; i < stats.Count; i++)
-            statBonuses.Add(new StatBonus(stats[i].StatName, (characterStats.Level - 1) * 10 + UnityEngine.Random.Range(0, 9)));
+            statBonuses.Add(new StatBonus(stats[i].StatName, (CombatController.Level - 1) * 10 + UnityEngine.Random.Range(0, 9)));
         
         GameObject newLoot = Instantiate(Resources.Load("Loot/" + newItem.TypeName) as GameObject);
         newLoot.GetComponent<Loot>().item = newItem;

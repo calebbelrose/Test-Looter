@@ -133,7 +133,7 @@ public class CreateItemManager : MonoBehaviour
         if (ItemScript.selectedItem == null)
         {
             if (isRandomType) { selectedID = Random.Range(0, ItemDatabase.Instance.TypeNameList.Count); }
-            if (isRandomLvl) { selectedLvl = Random.Range(1, CharacterStats.MaxLevel + 1); }
+            if (isRandomLvl) { selectedLvl = Random.Range(1, CombatController.MaxLevel + 1); }
             if (isRandomQuality) { selectedQuality = Random.Range(0, ItemDatabase.Instance.Qualities.Count); }
             ItemClass newItem = new ItemClass(selectedID, selectedLvl, selectedQuality, selectedStats);
             SpawnOrAddItem(newItem);
