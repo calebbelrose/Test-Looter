@@ -4,86 +4,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class SlotSectorScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    public int QuadNum {  get { return quadNum; } }
 
-    public GameObject slotParent;
-    public int QuadNum;
-    public static IntVector2 posOffset;
-    public static SlotSectorScript sectorScript;
-    public static ItemOverlayScript overlayScript;
-    private SlotScript parentSlotScript;
+    [SerializeField] private int quadNum;
+    [SerializeField] private SlotScript ParentSlotScript;
 
-    private void Start()
-    {
-        parentSlotScript = slotParent.GetComponent<SlotScript>();
-    }
+    public static SlotSectorScript SectorScript { get; private set; }
+    public static ItemOverlayScript OverlayScript;
 
+    //Highlight slot, display overlay if it has an item and change slot colour
     public void OnPointerEnter(PointerEventData eventData)
     {
-        sectorScript = this;
-        InvenGridManager.Instance.highlightedSlot = slotParent;
-        PosOffset();
+        SectorScript = this;
+        ParentSlotScript.InvenGridManager.HighlightedSlot = ParentSlotScript;
+
         if (ItemScript.selectedItem != null)
+            ParentSlotScript.InvenGridManager.RefreshColor(true);
+
+        if (ParentSlotScript.storedItemObject != null)
         {
-            InvenGridManager.Instance.RefreshColor(true);
-        }
-        if (parentSlotScript.storedItemObject != null && ItemScript.selectedItem == null)
-        {
-            InvenGridManager.Instance.ColorChangeLoop(parentSlotScript.storedItemObject.item.Quality.Colour, parentSlotScript.storedItemSize, parentSlotScript.storedItemStartPos);
-        }
-        if (parentSlotScript.storedItemObject != null)
-        {
-            overlayScript.UpdateOverlay(parentSlotScript.storedItemClass);
+            OverlayScript.UpdateOverlay(ParentSlotScript.storedItemClass);
+
+            if (ItemScript.selectedItem == null)
+                ParentSlotScript.InvenGridManager.ColorChangeLoop(ParentSlotScript.storedItemObject.item.Quality.Colour, ParentSlotScript.storedItemSize, ParentSlotScript.storedItemStartPos);
         }
     }
 
-    public void PosOffset()
-    {
-        if (ItemScript.selectedItemSize.x != 0 && ItemScript.selectedItemSize.x % 2 == 0)
-        {
-            switch (QuadNum)
-            {
-                case 1:
-                    posOffset.x = 0; break;
-                case 2:
-                    posOffset.x = -1; break;
-                case 3:
-                    posOffset.x = 0; break;
-                case 4:
-                    posOffset.x = -1; break;
-                default: break;
-            }
-        }
-        if (ItemScript.selectedItemSize.y != 0 && ItemScript.selectedItemSize.y % 2 == 0)
-        {
-            switch (QuadNum)
-            {
-                case 1:
-                    posOffset.y = -1; break;
-                case 2:
-                    posOffset.y = -1; break;
-                case 3:
-                    posOffset.y = 0; break;
-                case 4:
-                    posOffset.y = 0; break;
-                default: break;
-            }
-        }
-    }
-
+    //Reset overlay and slot colour
     public void OnPointerExit(PointerEventData eventData)
     {
-        sectorScript = null;
-        InvenGridManager.Instance.highlightedSlot = null;
-        overlayScript.UpdateOverlay(null);
+        SectorScript = null;
+        ParentSlotScript.InvenGridManager.HighlightedSlot = null;
+        OverlayScript.UpdateOverlay(null);
+
         if (ItemScript.selectedItem != null)
-        {
-            InvenGridManager.Instance.RefreshColor(false);
-        }
-        posOffset = IntVector2.Zero;
-        if (parentSlotScript.storedItemObject != null && ItemScript.selectedItem == null)
-        {
-            InvenGridManager.Instance.ColorChangeLoop(parentSlotScript.storedItemObject.item.Quality.Colour, parentSlotScript.storedItemSize, parentSlotScript.storedItemStartPos);
-        }
+            ParentSlotScript.InvenGridManager.RefreshColor(false);
+        else if (ParentSlotScript.storedItemObject != null)
+            ParentSlotScript.InvenGridManager.ColorChangeLoop(ParentSlotScript.storedItemObject.item.Quality.Colour, ParentSlotScript.storedItemSize, ParentSlotScript.storedItemStartPos);
     }
 }

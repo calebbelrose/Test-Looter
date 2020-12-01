@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     protected NavMeshAgent playerAgent;
     protected bool hasInteracted;
 
+    //Sets the destination of the agent to the location of this object
     public virtual void MoveToInteraction(NavMeshAgent playerAgent)
     {
         this.playerAgent = playerAgent;
@@ -21,6 +22,7 @@ public class Interactable : MonoBehaviour
         CheckDistance();
     }
 
+    //Interacts when the agent reaches the destination
     protected void CheckDistance()
     {
         if (!hasInteracted && playerAgent != null && !playerAgent.pathPending)
@@ -33,6 +35,7 @@ public class Interactable : MonoBehaviour
         }
     }    
 
+    //Interaction action
     public virtual void Interact()
     {
         Debug.Log("Base class");

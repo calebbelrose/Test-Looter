@@ -10,5 +10,6 @@ public class SlotScript : MonoBehaviour
     public IntVector2 storedItemSize;
     public IntVector2 storedItemStartPos;
     public ItemClass storedItemClass;
+    public InvenGridManager InvenGridManager;
     public bool isOccupied;
 }

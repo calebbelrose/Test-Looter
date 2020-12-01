@@ -3,50 +3,58 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class ItemClass {
-
-
-    public int GlobalID;
-    [HideInInspector] public int CategoryID;
-    [HideInInspector] public CategoryName CategoryName;
-    [HideInInspector] public int TypeID;
-    public string TypeName;
-    [Range(1, 100)] public int Level;
-    public Quality Quality;
-    [HideInInspector] public IntVector2 Size;
-    [HideInInspector] public Sprite Icon;
-    [HideInInspector] public string SerialID;
+public class ItemClass
+{
     public List<StatBonus> StatBonuses = new List<StatBonus>();
-
-    public static void SetItemValues(ItemClass item)
+    public int GlobalID { get; private set; }
+    public int CategoryID { get; private set; }
+    public CategoryName CategoryName { get; private set; }
+    public string TypeName { get; private set; }
+    public IntVector2 Size { get; private set; }
+    public Sprite Icon { get; private set; }
+    public Quality Quality { get; private set; }
+    public int Level { get { return level; } }
+    public string StatString
     {
-        ItemDatabase.Instance.PassItemData(ref item);
+        get
+        {
+            string statBonuses = "";
+
+            foreach (StatBonus stat in StatBonuses)
+                statBonuses += "," + (int)stat.StatName + "," + stat.BonusValue;
+
+            return statBonuses;
+        }
     }
 
-
-    public ItemClass(ItemClass passedItem)//create new item by copying passedITem properties
-    {
-        GlobalID = passedItem.GlobalID;
-        CategoryName = ItemDatabase.Instance.dbList[GlobalID].CategoryName;
-        Level = passedItem.Level;
-        Quality = passedItem.Quality;
-        foreach (StatBonus stat in passedItem.StatBonuses)
-            StatBonuses.Add(stat);
-        SetItemValues(this);
-    }
+    [Range(1, 100)] private int level;
 
     public ItemClass(int id, int level, int quality, List<StatBonus> stats)
     {
+        ItemData itemData = ItemDatabase.Instance.ItemData(id);
+
         GlobalID = id;
-        CategoryName = ItemDatabase.Instance.dbList[GlobalID].CategoryName;
-        Level = level;
-        Quality = ItemDatabase.Instance.Qualities[quality];
+        this.level = level;
+        Quality = ItemDatabase.Instance.Quality(quality);
         StatBonuses = stats.ToList();
-        SetItemValues(this);
+        CategoryID = itemData.CategoryID;
+        CategoryName = itemData.CategoryName;
+        TypeName = itemData.TypeName;
+        Size = itemData.Size;
+        Icon = itemData.Icon;
     }
 
-    public ItemClass()
+    public ItemClass(int id)
     {
+        ItemData itemData = ItemDatabase.Instance.ItemData(id);
 
+        GlobalID = id;
+        level = 1;
+        Quality = ItemDatabase.Instance.Quality(1);
+        CategoryID = itemData.CategoryID;
+        CategoryName = itemData.CategoryName;
+        TypeName = itemData.TypeName;
+        Size = itemData.Size;
+        Icon = itemData.Icon;
     }
 }

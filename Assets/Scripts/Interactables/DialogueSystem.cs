@@ -7,32 +7,25 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public Button ContinueButton;
-    public Text NameText, DialogueText;
-    private static DialogueSystem instance = null;
-    List<string> dialogueLines;
-    int dialogueIndex;
+    [SerializeField] private Button ContinueButton;
+    [SerializeField] private Text NameText, DialogueText;
 
-    public static DialogueSystem Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    private List<string> dialogueLines;
+    private int dialogueIndex;
 
+    public static DialogueSystem Instance { get; private set; } = null;
+
+    //Initializes singleton and hides dialogue box
     private void Awake()
     {
-        // if the singleton hasn't been initialized yet
-        if (instance != null && instance != this)
-        {
+        if (Instance != null && Instance != this)
             Destroy(this.gameObject);
-        }
 
-        instance = this;
+        Instance = this;
         gameObject.SetActive(false);
     }
 
+    //Adds new dialogue
     public void AddNewDialogue(string name, string[] lines)
     {
         NameText.text = name;
@@ -43,6 +36,7 @@ public class DialogueSystem : MonoBehaviour
         ContinueDialogue();
     }
 
+    //Continues displaying dialogue
     public void ContinueDialogue()
     {
         if (++dialogueIndex < dialogueLines.Count)

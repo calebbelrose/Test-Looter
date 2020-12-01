@@ -8,6 +8,7 @@ public class PlayerWeaponController : MonoBehaviour
     public List<ItemScript> Equipped = new List<ItemScript>();
     public CombatController CombatController;
 
+    //Equips item
     public void Equip(ItemClass itemToEquip)
     {
         ItemScript equippedItem = Equipped.Find(x => x.item.CategoryName == itemToEquip.CategoryName);
@@ -25,6 +26,7 @@ public class PlayerWeaponController : MonoBehaviour
         equippedItem.transform.parent = PlayerHand;
     }
 
+    //Performs attack
     void Attack()
     {
 

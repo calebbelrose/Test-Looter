@@ -4,10 +4,5 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    List<Stat> Stats { get; set; }
-
-    //void PerformAttack()
-    //{
-
-    //}
+    void PerformAttack();
 }

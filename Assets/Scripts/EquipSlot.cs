@@ -6,12 +6,18 @@ using UnityEngine.EventSystems;
 
 public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public CategoryName CategoryName;
-    public Image Image;
-    public ItemScript Item;
-    public CharacterStats characterStats;
-
     public bool Empty = true;
+    public ItemScript Item;
+
+    public Image Image { get { return image; } }
+    public GameObject EquipObject { get {return equipObject; } }
+
+    public CategoryName CategoryName { get { return categoryName; } }
+
+    [SerializeField] private CharacterStats CharacterStats;
+    [SerializeField] private CategoryName categoryName;
+    [SerializeField] private Image image;
+    [SerializeField] private GameObject equipObject;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -27,17 +33,12 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!Empty)
+            CharacterStats.Unequip(this);
+        else if (eventData.button == PointerEventData.InputButton.Left && ItemScript.selectedItem != null)
         {
-            characterStats.Unequip(this);
+            CharacterStats.SaveEquipment(ItemScript.selectedItem);
+            CharacterStats.EquipInSlot(ItemScript.selectedItem, this);
         }
-        else if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (ItemScript.selectedItem != null)
-            {
-                characterStats.Equip(ItemScript.selectedItem, this);
-            }
-        }
-
     }
 
     public void OnPointerExit(PointerEventData eventData)

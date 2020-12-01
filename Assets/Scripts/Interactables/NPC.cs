@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public class NPC : Interactable
 {
-    public string[] Dialogue;
-    public string Name;
+    [SerializeField] private string[] Dialogue;
+    [SerializeField] private string Name;
 
+    //Displays NPC's dialogue
     public override void Interact()
     {
         DialogueSystem.Instance.AddNewDialogue(Name, Dialogue);

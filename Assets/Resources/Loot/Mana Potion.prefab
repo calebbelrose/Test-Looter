@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552550684269552456}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 149.99998}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.225, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 22.5}
   m_Children: []
   m_Father: {fileID: 822580086206287201}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4273642073178404439
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 822580086206287201}
   - component: {fileID: 822580086206287200}
   - component: {fileID: 822580086206287206}
+  - component: {fileID: -8410790995145482503}
   m_Layer: 0
   m_Name: Mana Potion
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822580086206287203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22.96}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 927984824058739186}
@@ -127,25 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
-  renderer: {fileID: 2066010503425458845}
-  item:
-    GlobalID: 0
-    CategoryID: 0
-    CategoryName: 
-    TypeID: 0
-    TypeName: 
-    Level: 0
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
-    Size:
-      x: 0
-      y: 0
-    Icon: {fileID: 0}
-    SerialID: 
-    Stats: []
+  Item:
+    StatBonuses: []
+  HoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
+  Renderer: {fileID: 2066010503425458845}
   LootTextPrefab: {fileID: 3558581089250535135, guid: 52043d3902676f149b1043ae1d3039ec, type: 3}
+  Rigidbody: {fileID: -8410790995145482503}
 --- !u!65 &822580086206287206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -157,5 +145,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 3.5, z: 2}
-  m_Center: {x: 0, y: 1.75, z: 0}
+  m_Size: {x: 0.3, y: 0.525, z: 0.3}
+  m_Center: {x: 0, y: 0.2625, z: 0}
+--- !u!54 &-8410790995145482503
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822580086206287203}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0

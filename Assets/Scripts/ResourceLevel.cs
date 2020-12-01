@@ -5,7 +5,7 @@ public class ResourceLevel : MonoBehaviour
 {
 
     //Our renderer that'll make the top of the water visible
-    LineRenderer Body;
+    //LineRenderer Body;
 
     //Our physics arrays
     float[] xpositions;
@@ -45,7 +45,6 @@ public class ResourceLevel : MonoBehaviour
     {
         radiusSquared = (width / 2f);
         radiusSquared *= radiusSquared;
-        //Spawning our water
         SpawnResource();
     }
 
@@ -86,12 +85,12 @@ public class ResourceLevel : MonoBehaviour
         int nodecount = edgecount + 1;
 
         //Add our line renderer and set it up:
-        Body = gameObject.AddComponent<LineRenderer>();
+       /* Body = gameObject.AddComponent<LineRenderer>();
         Body.material = mat;
         Body.material.renderQueue = 1000;
         Body.positionCount = nodecount;
         Body.startWidth = 0.1f;
-        Body.endWidth = 0.1f;
+        Body.endWidth = 0.1f;*/
 
         //Declare our physics arrays
         xpositions = new float[nodecount];
@@ -112,7 +111,7 @@ public class ResourceLevel : MonoBehaviour
             xpositions[i] = left + width * i / edgecount;
             ypositions[i] = Mathf.Sqrt(radiusSquared - xpositions[i] * xpositions[i]);
             targetYpositions[i] = Mathf.Sqrt(radiusSquared - xpositions[i] * xpositions[i]);
-            Body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
+            //Body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
             accelerations[i] = 0;
             velocities[i] = 0;
         }
@@ -202,7 +201,7 @@ public class ResourceLevel : MonoBehaviour
             accelerations[i] = -force;
             ypositions[i] += velocities[i];
             velocities[i] += accelerations[i];
-            Body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
+            //Body.SetPosition(i, new Vector3(xpositions[i], ypositions[i], z));
         }
 
         //Now we store the difference in heights:

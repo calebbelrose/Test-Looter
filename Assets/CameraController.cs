@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float PlayerCameraDistance = 12f;
+    public Vector3 Offset;
     public Transform CameraTarget;
-    public Camera playerCamera;
+    public Camera PlayerCamera;
 
     float zoomSpeed = 25f;
-
-    private void Start()
-    {
-        transform.Rotate(45f, 0f, 0f);
-    }
+    public LayerMask LayerMask;
+    List<MazeWall> hidden = new List<MazeWall>();
+    [SerializeField] private GameObject Inventory; 
 
     private void Update()
     {
-        if(Input.GetAxisRaw("Mouse ScrollWheel") != 0)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            playerCamera.fieldOfView = Mathf.Clamp(playerCamera.fieldOfView - scroll * zoomSpeed, 15f, 100f);
+            PlayerCamera.fieldOfView = Mathf.Clamp(PlayerCamera.fieldOfView - scroll * zoomSpeed, 15f, 100f);
         }
 
-        transform.position = new Vector3(CameraTarget.position.x, CameraTarget.position.y +PlayerCameraDistance, CameraTarget.position.z - PlayerCameraDistance);
+        transform.position = CameraTarget.position + Offset;
+
+        if (Input.GetKeyDown(KeyCode.I))
+            Inventory.SetActive(!Inventory.activeSelf);
     }
 }

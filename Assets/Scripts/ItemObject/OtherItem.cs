@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class OtherItem : IEquatable<OtherItem>
 {
-    public ItemScript Item;
-    public IntVector2 StartPosition;
+    public ItemScript Item { get; private set; }
+    public IntVector2 StartPosition { get; private set; }
 
     public OtherItem (ItemScript item, IntVector2 startPosition)
     {

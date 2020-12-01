@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0167e5a2d76e6914e9318dcf588ae7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotParent: {fileID: 6846952214606941858}
-  QuadNum: 2
+  quadNum: 2
+  ParentSlotScript: {fileID: 114453922500673028}
 --- !u!1 &1581703450439536
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0167e5a2d76e6914e9318dcf588ae7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotParent: {fileID: 6846952214606941858}
-  QuadNum: 3
+  quadNum: 3
+  ParentSlotScript: {fileID: 114453922500673028}
 --- !u!1 &1671416959900612
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0167e5a2d76e6914e9318dcf588ae7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotParent: {fileID: 6846952214606941858}
-  QuadNum: 1
+  quadNum: 1
+  ParentSlotScript: {fileID: 114453922500673028}
 --- !u!1 &1690844012314360
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0167e5a2d76e6914e9318dcf588ae7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotParent: {fileID: 6846952214606941858}
-  QuadNum: 4
+  quadNum: 4
+  ParentSlotScript: {fileID: 114453922500673028}
 --- !u!1 &6846952214606941858
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,16 +465,16 @@ MonoBehaviour:
   storedItemClass:
     GlobalID: 0
     CategoryID: 0
-    CategoryName: 
-    TypeID: 0
+    CategoryName: 0
     TypeName: 
     Level: 0
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
     Size:
       x: 0
       y: 0
     Icon: {fileID: 0}
     SerialID: 
+    Quality:
+      Name: 
+      Colour: {r: 0, g: 0, b: 0, a: 0}
+      BaseChance: 0
   isOccupied: 0

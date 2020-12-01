@@ -1,45 +1,51 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CombatController : MonoBehaviour
 {
-    public float CurrentHealth = 100, MaxHealth = 100;
-    public float CurrentResource = 100, MaxResource = 100;
-    public List<Stat> Stats = new List<Stat>();
-    public Animator Animator;
-    public Weapon Weapon;
-    public static int MaxLevel = 100;
-    public int Level = 1;
-    public List<EquipSlot> EquipSlots = new List<EquipSlot>();
-    public Transform WeaponLocation;
+    public float MagicFind { get; private set; } = 1f;
+    public int Level { get; private set; } = 1;
+    public Animator Animator { get { return animator; } }
 
+
+    [SerializeField] protected List<EquipSlot> EquipSlots = new List<EquipSlot>();
+
+    [SerializeField] private Animator animator;
+    [SerializeField] private Weapon Weapon;
+    [SerializeField] private List<Stat> Stats = new List<Stat>();
+    [SerializeField] private List<CommonLootDrop> CommonLootDrops = new List<CommonLootDrop>();
+    [SerializeField] private Transform WeaponLocation;
+
+    protected float CurrentHealth = 100, MaxHealth = 100;
+    protected float CurrentResource = 100, MaxResource = 100;
     protected float experience = 0, experienceToNextLevel = 100;
 
-    private void Start()
-    {
-        foreach (StatName stat in System.Enum.GetValues(typeof(StatName)))
-            Stats.Add(new Stat(stat, 0));
-    }
+    public static int MaxLevel { get; } = 100;
 
+    //Adds stat bonus
     public void AddStatBonus(List<StatBonus> statBonuses)
     {
         foreach (StatBonus statBonus in statBonuses)
             Stats.Find(x => x.StatName == statBonus.StatName).AddStatBonus(statBonus);
     }
 
+    //Removes stat bonus
     public void RemoveStatBonus(List<StatBonus> statBonuses)
     {
         foreach (StatBonus statBonus in statBonuses)
             Stats.Find(x => x.StatName == statBonus.StatName).RemoveStatBonus(statBonus);
     }
 
+    //Performs attack
     public void PerformAttack()
     {
         Animator.SetTrigger("Attacking");
     }
 
+    //Takes damage
     public virtual void TakeDamage(float amount, CombatController attacker)
     {
         if (amount > 0)
@@ -48,27 +54,51 @@ public class CombatController : MonoBehaviour
 
             if (CurrentHealth <= 0)
             {
-                Destroy(gameObject);
+                int weightSum = 0;
+                int index = 0;
+                int roll;
+
+                foreach (LootDrop drop in CommonLootDrops)
+                    weightSum += drop.Weight;
+
+                roll = Random.Range(0, weightSum);
+
+                while(index < CommonLootDrops.Count && roll <= CommonLootDrops[index].Weight)
+                        roll -= CommonLootDrops[index].Weight;
+
+                //ItemDatabase.Instance.SpawnLoot(transform.position, CommonLootDrops[index].ItemID, Random.Range(CommonLootDrops[index].MinAmount, CommonLootDrops[index].MaxAmount));
+                ItemDatabase.Instance.SpawnLoot(transform.position, attacker);
                 attacker.AwardExperience(Level * MaxHealth);
+                Destroy(gameObject);
             }
         }
     }
 
+    //Uses resource
     public virtual void UseResource(float amount)
     {
         CurrentResource -= amount;
     }
 
+    //Awards experience
     protected virtual void AwardExperience(float amount)
     {
         experience += amount;
-        if (experience >= experienceToNextLevel)
+        while (experience >= experienceToNextLevel)
         {
             experience -= experienceToNextLevel;
             experienceToNextLevel = (int)(experienceToNextLevel * 1.25);
+            Level++;
         }
     }
 
+    //Returns ordered stats
+    public List<Stat> OrderedStats()
+    {
+        return Stats.OrderBy(x => UnityEngine.Random.value).Take(UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(StatName)).Length)).ToList();
+    }
+
+    //Returns damage
     public float Damage
     {
         get
@@ -77,15 +107,18 @@ public class CombatController : MonoBehaviour
         }
     }
 
+    //Returns crit chance
     public bool Crit
     {
         get
         {
             float Luck = Stats.Find(x => x.StatName.ToString() == "Luck").FinalValue;
+
             return Random.Range(0, Luck + 10000f) <= Luck;
         }
     }
 
+    //Returns crit damage
     public float CritMultiplier
     {
         get
@@ -94,6 +127,7 @@ public class CombatController : MonoBehaviour
         }
     }
 
+    //Returns strength multiplier
     public float StrengthMultiplier
     {
         get

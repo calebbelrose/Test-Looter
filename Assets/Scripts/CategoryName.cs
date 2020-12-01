@@ -10,5 +10,6 @@
     Legs,
     Gloves,
     Boots,
-    Consumable
+    Consumable,
+    Material
 }

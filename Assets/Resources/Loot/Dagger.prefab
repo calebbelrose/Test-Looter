@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8613991276534392480}
   - component: {fileID: 8613991276534392481}
   - component: {fileID: 8613991276534392478}
+  - component: {fileID: -5087271652755470952}
   m_Layer: 0
   m_Name: Dagger
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8613991276534392479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8070927789544986668}
@@ -45,25 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
-  renderer: {fileID: 6938532777943343939}
-  item:
-    GlobalID: 0
-    CategoryID: 0
-    CategoryName: 
-    TypeID: 0
-    TypeName: 
-    Level: 0
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
-    Size:
-      x: 0
-      y: 0
-    Icon: {fileID: 0}
-    SerialID: 
-    Stats: []
+  Item:
+    StatBonuses: []
+  HoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
+  Renderer: {fileID: 6938532777943343939}
   LootTextPrefab: {fileID: 3558581089250535135, guid: 52043d3902676f149b1043ae1d3039ec, type: 3}
+  Rigidbody: {fileID: -5087271652755470952}
 --- !u!65 &8613991276534392478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,8 +63,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.6, y: 0.2, z: 0.6}
-  m_Center: {x: 0.7, y: 0, z: 0}
+  m_Size: {x: 1.035, y: 0.045, z: 0.135}
+  m_Center: {x: 0.1575, y: 0.0225, z: 0}
+--- !u!54 &-5087271652755470952
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8613991276534392479}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &8884021776768041622
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,13 +106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8884021776768041622}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 4}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.0225, z: 0}
+  m_LocalScale: {x: 9, y: 9, z: 0.9}
   m_Children: []
   m_Father: {fileID: 8613991276534392480}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &5165181844096243593
 MeshFilter:
   m_ObjectHideFlags: 0

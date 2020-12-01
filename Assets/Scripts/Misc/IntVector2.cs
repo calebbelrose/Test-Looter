@@ -163,4 +163,12 @@ public struct IntVector2
     {
         return 0;
     }
+
+    public int CompareTo(IntVector2 other)
+    {
+        if (x == other.x)
+            return y.CompareTo(other.y);
+        else
+            return x.CompareTo(other.x);
+    }
 }

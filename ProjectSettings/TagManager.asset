@@ -8,6 +8,7 @@ TagManager:
   - InvenPanel
   - ItemDatabase
   - Interactable
+  - Hide
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - 
   - 
   - Post Processing
-  - 
-  - 
+  - Walls
+  - Player
   - 
   - 
   - 

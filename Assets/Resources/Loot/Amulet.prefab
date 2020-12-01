@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6564637468691431654}
   - component: {fileID: 6564637468691431655}
   - component: {fileID: 6900561980153661747}
+  - component: {fileID: 1883142381663451215}
   m_Layer: 0
   m_Name: Amulet
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6564637468691431641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 608038683308916392}
@@ -45,25 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
-  renderer: {fileID: 1745992762350437831}
-  item:
-    GlobalID: 0
-    CategoryID: 0
-    CategoryName: 
-    TypeID: 0
-    TypeName: 
-    Level: 0
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
-    Size:
-      x: 0
-      y: 0
-    Icon: {fileID: 0}
-    SerialID: 
-    Stats: []
+  Item:
+    StatBonuses: []
+  HoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
+  Renderer: {fileID: 1745992762350437831}
   LootTextPrefab: {fileID: 3558581089250535135, guid: 52043d3902676f149b1043ae1d3039ec, type: 3}
+  Rigidbody: {fileID: 1883142381663451215}
 --- !u!65 &6900561980153661747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,8 +63,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 0.2, z: 5.999998}
-  m_Center: {x: 0, y: 0.2, z: -2}
+  m_Size: {x: 0.6, y: 0.04, z: 1.2}
+  m_Center: {x: 0, y: 0.02, z: -0.4}
+--- !u!54 &1883142381663451215
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6564637468691431641}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1001 &1151398180620835139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -130,7 +134,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d501fcf7e12f2784c95959bbeb0bdfd7, type: 3}
       propertyPath: m_Materials.Array.data[0]

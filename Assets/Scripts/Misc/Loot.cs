@@ -3,57 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Loot : MonoBehaviour
 {
-    static float value = 10f;
-    public Material hoverMaterial;
+    public ItemClass Item;
+
+    [SerializeField] private Material HoverMaterial;
+    [SerializeField] private Renderer Renderer;
+    [SerializeField] private GameObject LootTextPrefab;
+    [SerializeField] private Rigidbody Rigidbody;
+
+    private GameObject LootObject;
     private Material[] hoverMaterials;
     private Material[] originalMaterials;
-    public new Renderer renderer;
-    public ItemClass item;
-    public GameObject LootTextPrefab;
-    private GameObject LootObject;
+    private Transform child;
+    private Quaternion originalRotation;
 
+    private static float value = 250f;
+
+    //Highlights loot and displays its name
     private void OnMouseEnter()
     {
         LootObject.SetActive(true);
-        //renderer.materials = hoverMaterials;
+        Renderer.materials = hoverMaterials;
         LootObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
     }
 
+    //Removes highlight from loot and hides its name
     private void OnMouseExit()
     {
-        //renderer.materials = originalMaterials;
+        Renderer.materials = originalMaterials;
         LootObject.SetActive(false);
     }
 
+    //Picks up loot
     private void OnMouseDown()
     {
         if (Vector3.Distance(transform.position, transform.position) < 1f)
         {
-            ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetObject().GetComponent<ItemScript>();
-            newItem.SetItemObject(item);
-            ItemScript.SetSelectedItem(newItem);
+            ItemScript newItem = ItemDatabase.Instance.ItemEquipPool.GetItemScript();
+
+            newItem.SetItemObject(Item);
+            
+            if (InvenGridManager.Instance.isActiveAndEnabled)
+            {
+                ItemScript.SetSelectedItem(newItem);
+                Destroy(gameObject);
+            }
+            else if (InvenGridManager.Instance.StoreLoot(newItem))
+                Destroy(gameObject);
+            else
+                StartCoroutine("DropLoot");
         }
-        Destroy(gameObject);
     }
 
-    IEnumerator Start()
+    //Drops loot
+    IEnumerator DropLoot()
     {
+        Vector3 Velocity;
         bool stillFlying = true;
-        Transform child = transform.GetChild(0);
-        Quaternion originalRotation = child.rotation;
-        originalMaterials = new Material[renderer.materials.Length];
-        renderer.materials.CopyTo(originalMaterials, 0);
-        hoverMaterials = new Material[originalMaterials.Length];
-        for (int i = 0; i < hoverMaterials.Length; i++)
-            hoverMaterials[i] = hoverMaterial;
-        Vector3 Velocity = new Vector3(Random.Range(-value, value), 10f, Random.Range(-value, value));
-        LootObject = Instantiate(LootTextPrefab, ItemDatabase.Instance.LootParent);
-        Text lootText = LootObject.transform.GetChild(0).GetComponent<Text>();
-        lootText.text = item.TypeName;
-        lootText.color = item.Quality.Colour;
-        LootObject.SetActive(false);
+
+        Velocity = new Vector3(0f, 10f, 0f);
 
         while (stillFlying)
         {
@@ -61,24 +71,43 @@ public class Loot : MonoBehaviour
 
             child.Rotate(Velocity * 0.1f);
 
-            if (Velocity.y < 0)
+            if (Velocity.y < 0 && pos.y < 0f)
             {
-                if (pos.y < 0f)
-                {
-                    pos.y = 0f;
-                    stillFlying = false;
-                    child.rotation = originalRotation;
-                }
+                pos.y = 0f;
+                stillFlying = false;
+                child.rotation = originalRotation;
             }
 
             transform.position = pos;
-
             Velocity += Vector3.up * -30.0f * Time.deltaTime;
-
             yield return null;
         }
     }
 
+    //Sets up loot and drops it
+    void Start()
+    {
+        Text lootText;
+
+        child = transform.GetChild(0);
+        originalRotation = child.rotation;
+        originalMaterials = new Material[Renderer.materials.Length];
+        Renderer.materials.CopyTo(originalMaterials, 0);
+        hoverMaterials = new Material[originalMaterials.Length];
+        Rigidbody.AddForce(Random.Range(-value, value), 0f, Random.Range(-value, value));
+        LootObject = ItemDatabase.Instance.CreateLoot(LootTextPrefab);
+        lootText = LootObject.transform.GetChild(0).GetComponent<Text>();
+        lootText.text = Item.TypeName;
+        lootText.color = Item.Quality.Colour;
+        LootObject.SetActive(false);
+
+        for (int i = 0; i < hoverMaterials.Length; i++)
+            hoverMaterials[i] = HoverMaterial;
+
+        StartCoroutine("DropLoot");
+    }
+
+    //Destroys gameobject
     private void OnDestroy()
     {
         GameObject.Destroy(LootObject);

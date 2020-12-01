@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6072705238653355862}
   - component: {fileID: 6072705238653355863}
   - component: {fileID: 6072705238653355857}
+  - component: {fileID: -4104763615711916605}
   m_Layer: 0
   m_Name: Helmet
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6072705238653355860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6038249854010806211}
@@ -45,25 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b251532e5596e4c995da1d61ab8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
-  renderer: {fileID: 4865858595117446316}
-  item:
-    GlobalID: 0
-    CategoryID: 0
-    CategoryName: 
-    TypeID: 0
-    TypeName: 
-    Level: 0
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
-    Size:
-      x: 0
-      y: 0
-    Icon: {fileID: 0}
-    SerialID: 
-    Stats: []
+  Item:
+    StatBonuses: []
+  HoverMaterial: {fileID: 2100000, guid: a89cebef90dbaa34f97d5a4e52297830, type: 2}
+  Renderer: {fileID: 4865858595117446316}
   LootTextPrefab: {fileID: 3558581089250535135, guid: 52043d3902676f149b1043ae1d3039ec, type: 3}
+  Rigidbody: {fileID: -4104763615711916605}
 --- !u!65 &6072705238653355857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,8 +63,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5, z: 2}
-  m_Center: {x: -0.0000002328306, y: -0.25, z: -0.0000001862645}
+  m_Size: {x: 0.8, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!54 &-4104763615711916605
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072705238653355860}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1001 &6072705238725503016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalPosition.z
@@ -106,11 +110,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_RootOrder
@@ -118,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -127,6 +131,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4f3c433da4c1c734e8d85812946a6f94, type: 3}
       propertyPath: m_Materials.Array.data[0]

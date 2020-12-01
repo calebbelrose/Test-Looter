@@ -1,19 +1,22 @@
-GlobalID,CategoryID,CategoryName,TypeID,TypeName,SizeX,SizeY
-0,0,Weapon,0,Axe,2,4
-1,0,Weapon,1,Bow,2,4
-2,0,Weapon,2,Dagger,1,2
-3,0,Weapon,3,Mace,2,3
-4,0,Weapon,4,Spear,1,4
-5,0,Weapon,5,Sword,2,3
-6,1,Offhand,0,Shield,2,3
-7,1,Offhand,1,Quiver,2,3
-8,1,Offhand,2,Focus,2,2
-9,2,Helmet,0,Helmet,2,2
-10,2,Gloves,1,Gloves,2,2
-11,2,Boots,2,Boots,2,2
-12,2,Torso,3,Body Armour,2,3
-13,3,Ring,0,Ring,1,1
-14,3,Belt,1,Belt,2,1
-15,3,Amulet,2,Amulet,1,1
-16,4,Consumable,0,Life Potion,1,2
-17,4,Consumable,1,Mana Potion,1,2
+0,0,Weapon,Axe,2,4
+1,0,Weapon,Bow,2,4
+2,0,Weapon,Dagger,1,2
+3,0,Weapon,Mace,2,3
+4,0,Weapon,Spear,1,4
+5,0,Weapon,Sword,2,3
+6,1,Offhand,Shield,2,3
+7,1,Offhand,Quiver,2,3
+8,1,Offhand,Focus,2,2
+9,2,Helmet,Helmet,2,2
+10,2,Gloves,Gloves,2,2
+11,2,Boots,Boots,2,2
+12,2,Torso,Body Armour,2,3
+13,3,Ring,Ring,1,1
+14,3,Belt,Belt,2,1
+15,3,Amulet,Amulet,1,1
+16,4,Consumable,Life Potion,1,2
+17,4,Consumable,Mana Potion,1,2
+18,5,Material,Copper Ingot,1,1
+19,5,Material,Bronze Ingot,1,1
+20,5,Material,Iron Ingot,1,1
+21,5,Material,Steel Ingot,1,1

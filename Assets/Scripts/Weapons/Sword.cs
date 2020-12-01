@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour, IWeapon
 {
-    public List<Stat> Stats { get; set; }
-
+    //Performs sword attack
     public void PerformAttack()
     {
         Debug.Log("Sword attack");
