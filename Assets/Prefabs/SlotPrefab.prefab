@@ -463,18 +463,6 @@ MonoBehaviour:
     x: 0
     y: 0
   storedItemClass:
-    GlobalID: 0
-    CategoryID: 0
-    CategoryName: 0
-    TypeName: 
-    Level: 0
-    Size:
-      x: 0
-      y: 0
-    Icon: {fileID: 0}
-    SerialID: 
-    Quality:
-      Name: 
-      Colour: {r: 0, g: 0, b: 0, a: 0}
-      BaseChance: 0
+    StatBonuses: []
+  InvenGridManager: {fileID: 0}
   isOccupied: 0

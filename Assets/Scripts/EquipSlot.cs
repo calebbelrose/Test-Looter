@@ -10,7 +10,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public ItemScript Item;
 
     public Image Image { get { return image; } }
-    public GameObject EquipObject { get {return equipObject; } }
+    public GameObject EquipObject { get { return equipObject; } }
 
     public CategoryName CategoryName { get { return categoryName; } }
 

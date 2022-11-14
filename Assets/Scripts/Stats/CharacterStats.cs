@@ -115,7 +115,6 @@ public class CharacterStats : CombatController
         RemoveStatBonus(equipSlot.Item.item.StatBonuses);
         ItemScript.SetSelectedItem(equipSlot.Item);
         equipSlot.Empty = true;
-        equipSlot.EquipObject.SetActive(false);
         File.WriteAllLines("./Assets/Scripts/CreateItem/SavedEquipment.csv", File.ReadLines("./Assets/Scripts/CreateItem/SavedEquipment.csv").Where(line => line.Split(',')[0] != equipSlot.CategoryName.ToString()).ToList());
     }
 

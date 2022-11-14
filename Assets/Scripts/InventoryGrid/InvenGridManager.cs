@@ -70,10 +70,9 @@ public class InvenGridManager : MonoBehaviour
                 //If the slot has an item
                 else
                 {
-                    SlotScript slotScript = HighlightedSlot;
-                    if (slotScript.isOccupied == true)
+                    if (HighlightedSlot.isOccupied)
                     {
-                        ColorChangeLoop(Color.white, slotScript.storedItemSize, slotScript.storedItemStartPos);
+                        ColorChangeLoop(Color.white, HighlightedSlot.storedItemSize, HighlightedSlot.storedItemStartPos);
                         ItemScript.SetSelectedItem(GetItem(HighlightedSlot));
                         RefreshColor(true);
                     }
